@@ -5,6 +5,14 @@ workflows:
     environment:
       flutter: stable
     scripts:
+      - name: Regenerate Android structure
+        script: |
+          mkdir -p temp_flutter_project
+          cd temp_flutter_project
+          flutter create --platforms android pricepeek_temp
+          cd ../
+          cp -r temp_flutter_project/pricepeek_temp/android/* ./android/
+          rm -rf temp_flutter_project
       - name: Get packages
         script: flutter pub get
       - name: Build APK
